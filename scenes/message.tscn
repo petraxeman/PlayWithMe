@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://usswnnb6era4"]
+
+[ext_resource type="Script" path="res://scenes/message.gd" id="1_jmdtj"]
+
+[node name="message" type="MarginContainer"]
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_jmdtj")
+
+[node name="panel" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="label" type="Label" parent="panel/margin"]
+layout_mode = 2
+text = "Тут что-то произошло. Это сообщение от Бота. Тут что-то произошло. Это сообщение от Бота. Тут что-то произошло. Это сообщение от Бота. Тут что-то произошло. Это сообщение от Бота"
+autowrap_mode = 2

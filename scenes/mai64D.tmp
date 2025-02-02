@@ -1,0 +1,155 @@
+[gd_scene load_steps=3 format=3 uid="uid://btmvlrtubfcaj"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_h45kv"]
+[ext_resource type="PackedScene" uid="uid://b5q7bsyfh4lq4" path="res://scenes/save_slot.tscn" id="2_mk3yl"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h45kv")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.319825, 0.341422, 0.416439, 1)
+
+[node name="main_view" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="vbox" type="VBoxContainer" parent="main_view"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="start" type="Button" parent="main_view/vbox"]
+layout_mode = 2
+text = "Новое преключение"
+
+[node name="load" type="Button" parent="main_view/vbox"]
+layout_mode = 2
+text = "Загрузить"
+
+[node name="settings" type="Button" parent="main_view/vbox"]
+layout_mode = 2
+text = "Настройки"
+
+[node name="exit" type="Button" parent="main_view/vbox"]
+layout_mode = 2
+text = "Выход
+"
+
+[node name="settings" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="vbox" type="VBoxContainer" parent="settings"]
+layout_mode = 2
+alignment = 1
+
+[node name="model" type="HBoxContainer" parent="settings/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="settings/vbox/model"]
+layout_mode = 2
+text = "AI Token: "
+
+[node name="option" type="OptionButton" parent="settings/vbox/model"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "gemini"
+popup/item_1/text = "chatgpt"
+popup/item_1/id = 1
+
+[node name="token" type="HBoxContainer" parent="settings/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="Label" parent="settings/vbox/token"]
+layout_mode = 2
+text = "AI Token: "
+
+[node name="edit" type="LineEdit" parent="settings/vbox/token"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="actions" type="HBoxContainer" parent="settings/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="save" type="Button" parent="settings/vbox/actions"]
+layout_mode = 2
+text = "Сохранить"
+
+[node name="cancel" type="Button" parent="settings/vbox/actions"]
+layout_mode = 2
+text = "Отменить"
+
+[node name="load" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="vbox" type="VBoxContainer" parent="load"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="scroll" type="ScrollContainer" parent="load/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="load/vbox/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="save_1" parent="load/vbox/scroll/vbox" instance=ExtResource("2_mk3yl")]
+layout_mode = 2
+
+[node name="actions" type="HBoxContainer" parent="load/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="load" type="Button" parent="load/vbox/actions"]
+layout_mode = 2
+text = "Загрузить"
+
+[node name="cancel" type="Button" parent="load/vbox/actions"]
+layout_mode = 2
+text = "Отмена"
+
+[connection signal="pressed" from="main_view/vbox/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="main_view/vbox/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="main_view/vbox/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="main_view/vbox/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="settings/vbox/actions/save" to="." method="_on_save_settings_pressed"]
+[connection signal="pressed" from="settings/vbox/actions/cancel" to="." method="_on_cancel_settings_pressed"]
+[connection signal="pressed" from="load/vbox/actions/cancel" to="." method="_on_cancel_load_pressed"]

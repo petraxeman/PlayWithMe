@@ -1,0 +1,167 @@
+[gd_scene load_steps=3 format=3 uid="uid://df7nrdoo6mtuc"]
+
+[ext_resource type="Script" path="res://scenes/game_view.gd" id="1_posgu"]
+[ext_resource type="PackedScene" uid="uid://b2d8gsq48t4yh" path="res://scenes/memory_row.tscn" id="2_hled3"]
+
+[node name="game_view" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_posgu")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.319825, 0.341422, 0.416439, 1)
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="toolbar" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="info" type="Button" parent="vbox/toolbar"]
+layout_mode = 2
+text = "Информация"
+
+[node name="inv" type="Button" parent="vbox/toolbar"]
+layout_mode = 2
+text = "Инвентарь"
+
+[node name="exit" type="Button" parent="vbox/toolbar"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Выход"
+
+[node name="scroll" type="ScrollContainer" parent="vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="vbox" type="VBoxContainer" parent="vbox/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="actions" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="custom_input" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="edit" type="LineEdit" parent="vbox/custom_input"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="enter" type="Button" parent="vbox/custom_input"]
+layout_mode = 2
+text = "Отправить"
+
+[node name="info_panel" type="PopupPanel" parent="."]
+mode = 1
+title = "Info"
+initial_position = 1
+size = Vector2i(775, 500)
+wrap_controls = false
+borderless = false
+always_on_top = true
+
+[node name="scroll" type="ScrollContainer" parent="info_panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 771.0
+offset_bottom = 496.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="margin" type="MarginContainer" parent="info_panel/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="vbox" type="VBoxContainer" parent="info_panel/scroll/margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="main" type="GridContainer" parent="info_panel/scroll/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="hnlabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "Имя героя:"
+
+[node name="hero_name" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Герой Гимель"
+
+[node name="hdlabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "Описание героя:"
+
+[node name="hero_desc" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="slabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "Сеттинг:"
+
+[node name="settings" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Провожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь ФриренПровожающая в последний путь Фрирен"
+autowrap_mode = 3
+
+[node name="alabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "Дополнительно:"
+
+[node name="additional" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "По мотивам одноименного аниме"
+
+[node name="memory" type="VBoxContainer" parent="info_panel/scroll/margin/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="info_panel/scroll/margin/vbox/memory"]
+layout_mode = 2
+text = "Память:"
+
+[node name="rows" type="VBoxContainer" parent="info_panel/scroll/margin/vbox/memory"]
+layout_mode = 2
+
+[node name="memory_row" parent="info_panel/scroll/margin/vbox/memory/rows" instance=ExtResource("2_hled3")]
+layout_mode = 2
+
+[connection signal="pressed" from="vbox/toolbar/info" to="." method="_on_info_open_pressed"]
+[connection signal="pressed" from="vbox/toolbar/exit" to="." method="_on_exit_pressed"]

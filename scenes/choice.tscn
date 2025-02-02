@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://028ounkcka2f"]
+
+[ext_resource type="Script" path="res://scenes/choice.gd" id="1_ex5l7"]
+
+[node name="choice" type="MarginContainer"]
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_ex5l7")
+
+[node name="panel" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="margin" type="MarginContainer" parent="panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="row" type="HBoxContainer" parent="panel/margin"]
+layout_mode = 2
+
+[node name="ap" type="Label" parent="panel/margin/row"]
+layout_mode = 2
+text = "Вы выбрали | "
+
+[node name="label" type="Label" parent="panel/margin/row"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Тут что-то произошло. Это сообщение о вашем выбореообщение о вашем выбореообщение о вашем выбореообщение о вашем выборе"
+autowrap_mode = 2

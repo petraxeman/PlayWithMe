@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtf6ato5hn6sw"]
+
+[ext_resource type="Script" path="res://scenes/create_game.gd" id="1_2rbc7"]
+
+[node name="create_game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2rbc7")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.319825, 0.341422, 0.416439, 1)
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 235.0
+offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="hero_name" type="VBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="vbox/hero_name"]
+layout_mode = 2
+text = "Имя героя"
+horizontal_alignment = 1
+
+[node name="edit" type="LineEdit" parent="vbox/hero_name"]
+layout_mode = 2
+
+[node name="hero_desc" type="VBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="vbox/hero_desc"]
+layout_mode = 2
+text = "Описание героя"
+horizontal_alignment = 1
+
+[node name="edit" type="TextEdit" parent="vbox/hero_desc"]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 2
+scroll_fit_content_height = true
+
+[node name="setting" type="VBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="vbox/setting"]
+layout_mode = 2
+text = "Сеттинг"
+horizontal_alignment = 1
+
+[node name="edit" type="LineEdit" parent="vbox/setting"]
+layout_mode = 2
+
+[node name="additional" type="VBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="vbox/additional"]
+layout_mode = 2
+text = "Дополнительная информация"
+horizontal_alignment = 1
+
+[node name="edit" type="TextEdit" parent="vbox/additional"]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 2
+scroll_fit_content_height = true
+
+[node name="actions" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="start" type="Button" parent="vbox/actions"]
+layout_mode = 2
+text = "Начать"
+
+[node name="cancel" type="Button" parent="vbox/actions"]
+layout_mode = 2
+text = "Отмена"
+
+[connection signal="pressed" from="vbox/actions/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="vbox/actions/cancel" to="." method="_on_cancel_pressed"]
