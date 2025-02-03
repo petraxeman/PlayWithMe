@@ -10,7 +10,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	$vbox/scroll.size_flags_stretch_ratio = 6
 	$vbox/actions.size_flags_stretch_ratio = 1
-	await get_tree().create_timer(0.01).timeout.connect(func () -> void: render_choices())
+	await get_tree().create_timer(0.1).timeout.connect(func () -> void: render_choices())
 	slide_down()
 
 
@@ -51,24 +51,29 @@ func choice(text: String, dificult: String):
 			threshold = 50
 		"hard":
 			threshold = 80
+		
 	
 	var check: int = rng.randi_range(0, 100)
-	var check_result: String = "(Не получилось выполнить)"
+	var check_result: String = "Не получилось выполнить"
 	if check >= threshold:
-		check_result = "(Получилось выполнить)"
-	
+		check_result = "Получилось выполнить"
+	if dificult == "undefined":
+		check_result = "Неизвестно"
+		
+	var usr_msg = "{text} ({check_result})".format({"text": text, "check_result": check_result})
 	var ch_msg = choice_pack.instantiate()
-	ch_msg.set_text(text + " " + check_result)
+	ch_msg.set_text(usr_msg)
 	$vbox/scroll/vbox.add_child(ch_msg)
-	Globals.current_game.chat.append({"role": "user", "text": text + " " + check_result})
+	Globals.current_game.chat.append({"role": "user", "text": usr_msg})
 	
 	slide_down()
 	
 	for child in $vbox/actions.get_children():
 		child.disabled = true
+	$vbox/custom_input/enter.disabled = true
 	
 	var cg = Globals.current_game
-	var resp = await Aiapi.gen_cont_game(text + " " + check_result)
+	var resp = await Aiapi.gen_cont_game(text, check_result)
 	
 	Globals.current_game.memory.append(resp["remember"])
 	Globals.current_game.chat.append({"role": "assistant", "text": resp["text"]})
@@ -82,6 +87,7 @@ func choice(text: String, dificult: String):
 	
 	slide_down()
 	render_choices()
+	$vbox/custom_input/enter.disabled = false
 
 
 func slide_down():
@@ -155,3 +161,8 @@ func _on_exit_pressed():
 	var main_menu_scene = load("res://scenes/main_menu.tscn").instantiate()
 	get_tree().root.add_child(main_menu_scene)
 	queue_free()
+
+
+func _on_enter_custom_choice_pressed():
+	
+	choice($vbox/custom_input/edit.text, "undefined")

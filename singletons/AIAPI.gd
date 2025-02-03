@@ -39,6 +39,8 @@ var choice_game_query = """
 Предыдущие сцены (не больще 3): {prev_scene}
 
 Игрок решил сделать: {choice}
+Получилось ли у него сделать это: {check_result}
+
 Верни ответ в формате JSON.
 
 Пример:
@@ -67,7 +69,7 @@ func gen_start_game(hero_name: String, hero_description: String, setting: String
 	return resp
 
 
-func gen_cont_game(choice: String):
+func gen_cont_game(choice: String, check_result: String):
 	var cg = Globals.current_game
 	
 	var last_scenes = []
@@ -88,7 +90,9 @@ func gen_cont_game(choice: String):
 		"memory": ", ".join(cg.memory),
 		"prev_scene": "\n".join(last_scenes),
 		"choice": choice,
+		"check_result": check_result
 		}
+	
 	var query = choice_game_query.format(data)
 	var resp = await Globals.chatbot.ask(query)
 	return resp

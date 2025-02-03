@@ -75,7 +75,6 @@ mode = 1
 title = "Info"
 initial_position = 1
 size = Vector2i(775, 500)
-visible = true
 wrap_controls = false
 borderless = false
 always_on_top = true
@@ -173,3 +172,4 @@ layout_mode = 2
 
 [connection signal="pressed" from="vbox/toolbar/info" to="." method="_on_info_open_pressed"]
 [connection signal="pressed" from="vbox/toolbar/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="vbox/custom_input/enter" to="." method="_on_enter_custom_choice_pressed"]
