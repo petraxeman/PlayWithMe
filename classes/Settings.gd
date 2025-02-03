@@ -3,7 +3,10 @@ class_name Settings
 
 var aimodel = ""
 var aitoken = ""
+var aiendpoint = ""
 
+var language = ""
+var theme = ""
 
 
 func load_settings():
@@ -17,13 +20,20 @@ func load_settings():
 	
 	aimodel = data.get("aimodel", "gemini")
 	aitoken = data.get("aitoken", "")
+	aiendpoint = data.get("aiendpoint", "")
+	
+	language = data.get("language", "en")
+	theme = data.get("theme", "NightlyDog.tres")
 
 
 func dump_settings():
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var data = {
 		"aimodel": aimodel,
-		"aitoken": aitoken
+		"aitoken": aitoken,
+		"aiendpoint": aiendpoint,
+		"language": language,
+		"theme": theme
 	}
 	
 	if file:

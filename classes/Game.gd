@@ -3,6 +3,7 @@ class_name GameObj
 
 var uuid: String
 var memory: Array = []
+var story_name: String = ""
 
 var setting: String = ""
 var additional: String = ""

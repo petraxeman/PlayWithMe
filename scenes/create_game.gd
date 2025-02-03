@@ -6,10 +6,11 @@ var game_view_packed = preload("res://scenes/game_view.tscn")
 
 func _on_start_pressed():
 	var game = GameObj.new()
-	game.hero_name = $vbox/hero_name/edit.text
-	game.hero_desc = $vbox/hero_desc/edit.text
-	game.setting = $vbox/setting/edit.text
-	game.additional = $vbox/additional/edit.text
+	game.hero_name = $vbox/hero_name/vbox/edit.text
+	game.hero_desc = $vbox/hero_desc/vbox/edit.text
+	game.setting = $vbox/setting/vbox/edit.text
+	game.additional = $vbox/additional/vbox/edit.text
+	
 	
 	if not game.hero_name or not game.setting:
 		return

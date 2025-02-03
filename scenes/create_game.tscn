@@ -11,14 +11,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2rbc7")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.319825, 0.341422, 0.416439, 1)
 
 [node name="vbox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -32,67 +31,84 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="hero_name" type="VBoxContainer" parent="vbox"]
+[node name="hero_name" type="PanelContainer" parent="vbox"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="vbox/hero_name"]
+[node name="vbox" type="VBoxContainer" parent="vbox/hero_name"]
 layout_mode = 2
-text = "Имя героя"
+
+[node name="label" type="Label" parent="vbox/hero_name/vbox"]
+layout_mode = 2
+text = "HERO_NAME_LBL"
 horizontal_alignment = 1
 
-[node name="edit" type="LineEdit" parent="vbox/hero_name"]
+[node name="edit" type="LineEdit" parent="vbox/hero_name/vbox"]
+layout_mode = 2
+placeholder_text = "HERO_NAME_TEXT"
+
+[node name="hero_desc" type="PanelContainer" parent="vbox"]
 layout_mode = 2
 
-[node name="hero_desc" type="VBoxContainer" parent="vbox"]
+[node name="vbox" type="VBoxContainer" parent="vbox/hero_desc"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="vbox/hero_desc"]
+[node name="label" type="Label" parent="vbox/hero_desc/vbox"]
 layout_mode = 2
-text = "Описание героя"
+text = "HERO_DESC_LBL"
 horizontal_alignment = 1
 
-[node name="edit" type="TextEdit" parent="vbox/hero_desc"]
+[node name="edit" type="TextEdit" parent="vbox/hero_desc/vbox"]
 layout_mode = 2
 size_flags_vertical = 3
+placeholder_text = "HERO_DESC_TEXT"
 autowrap_mode = 2
 scroll_fit_content_height = true
 
-[node name="setting" type="VBoxContainer" parent="vbox"]
+[node name="setting" type="PanelContainer" parent="vbox"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="vbox/setting"]
+[node name="vbox" type="VBoxContainer" parent="vbox/setting"]
 layout_mode = 2
-text = "Сеттинг"
+
+[node name="label" type="Label" parent="vbox/setting/vbox"]
+layout_mode = 2
+text = "SETTING_LBL"
 horizontal_alignment = 1
 
-[node name="edit" type="LineEdit" parent="vbox/setting"]
+[node name="edit" type="LineEdit" parent="vbox/setting/vbox"]
+layout_mode = 2
+placeholder_text = "SETTING_TEXT"
+
+[node name="additional" type="PanelContainer" parent="vbox"]
 layout_mode = 2
 
-[node name="additional" type="VBoxContainer" parent="vbox"]
+[node name="vbox" type="VBoxContainer" parent="vbox/additional"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="vbox/additional"]
+[node name="label" type="Label" parent="vbox/additional/vbox"]
 layout_mode = 2
-text = "Дополнительная информация"
+text = "ADDITIONAL_LBL"
 horizontal_alignment = 1
 
-[node name="edit" type="TextEdit" parent="vbox/additional"]
+[node name="edit" type="TextEdit" parent="vbox/additional/vbox"]
 layout_mode = 2
 size_flags_vertical = 3
+placeholder_text = "ADDITIONAL_TEXT"
 autowrap_mode = 2
 scroll_fit_content_height = true
 
 [node name="actions" type="HBoxContainer" parent="vbox"]
 layout_mode = 2
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="start" type="Button" parent="vbox/actions"]
 layout_mode = 2
-text = "Начать"
+text = "START_BTN"
 
 [node name="cancel" type="Button" parent="vbox/actions"]
 layout_mode = 2
-text = "Отмена"
+text = "CANCEL_BTN"
 
 [connection signal="pressed" from="vbox/actions/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="vbox/actions/cancel" to="." method="_on_cancel_pressed"]

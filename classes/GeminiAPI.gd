@@ -31,11 +31,12 @@ func _request_text(prompt):
 						Твоя главная задача сделать интересную историю.
 						Возвращай ответ всегда в формате JSON в виде представленном пользователем."
 			}
-		}
+		},
+		"generationConfig": {"response_mime_type": "application/json"}
 	})
 	
-	var response = Aiapi.http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
-	response = await Aiapi.http.request_completed
+	Aiapi.http.request(url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
+	var response = await Aiapi.http.request_completed
 	var resp = _parse_response(response[3])
 	
 	if not resp["status"]:

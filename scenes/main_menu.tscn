@@ -12,14 +12,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h45kv")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.319825, 0.341422, 0.416439, 1)
 
 [node name="main_view" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -35,24 +34,31 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
+[node name="label" type="Label" parent="main_view/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 45
+text = "Play with me v0.1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="start" type="Button" parent="main_view/vbox"]
 layout_mode = 2
-text = "Новое преключение"
+text = "NEW_ADVENTURE_BTN"
 
 [node name="load" type="Button" parent="main_view/vbox"]
 layout_mode = 2
-text = "Загрузить"
+text = "LOAD_SAVE_BTN"
 
 [node name="settings" type="Button" parent="main_view/vbox"]
 layout_mode = 2
-text = "Настройки"
+text = "SETTINGS_BTN"
 
 [node name="exit" type="Button" parent="main_view/vbox"]
 layout_mode = 2
-text = "Выход
-"
+text = "EXIT_BTN"
 
-[node name="settings" type="HBoxContainer" parent="."]
+[node name="settings" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -62,19 +68,30 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="vbox" type="VBoxContainer" parent="settings"]
+[node name="panel" type="PanelContainer" parent="settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="vbox" type="VBoxContainer" parent="settings/panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="label" type="Label" parent="settings/panel/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "SETTINGS_LBL"
+horizontal_alignment = 1
+
+[node name="aimodel" type="HBoxContainer" parent="settings/panel/vbox"]
 layout_mode = 2
 alignment = 1
 
-[node name="model" type="HBoxContainer" parent="settings/vbox"]
+[node name="label" type="Label" parent="settings/panel/vbox/aimodel"]
 layout_mode = 2
-alignment = 1
+text = "AIMODEL_LBL"
 
-[node name="label" type="Label" parent="settings/vbox/model"]
-layout_mode = 2
-text = "AI Token: "
-
-[node name="option" type="OptionButton" parent="settings/vbox/model"]
+[node name="option" type="OptionButton" parent="settings/panel/vbox/aimodel"]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
@@ -83,29 +100,61 @@ popup/item_0/text = "gemini"
 popup/item_1/text = "chatgpt"
 popup/item_1/id = 1
 
-[node name="token" type="HBoxContainer" parent="settings/vbox"]
+[node name="aitoken" type="HBoxContainer" parent="settings/panel/vbox"]
 layout_mode = 2
 alignment = 1
 
-[node name="label" type="Label" parent="settings/vbox/token"]
+[node name="label" type="Label" parent="settings/panel/vbox/aitoken"]
 layout_mode = 2
-text = "AI Token: "
+text = "AITOKEN_LBL"
 
-[node name="edit" type="LineEdit" parent="settings/vbox/token"]
+[node name="edit" type="LineEdit" parent="settings/panel/vbox/aitoken"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="actions" type="HBoxContainer" parent="settings/vbox"]
+[node name="aiendpoint" type="HBoxContainer" parent="settings/panel/vbox"]
 layout_mode = 2
 alignment = 1
 
-[node name="save" type="Button" parent="settings/vbox/actions"]
+[node name="label" type="Label" parent="settings/panel/vbox/aiendpoint"]
 layout_mode = 2
-text = "Сохранить"
+text = "AIENDPOINT_LBL"
 
-[node name="cancel" type="Button" parent="settings/vbox/actions"]
+[node name="edit" type="LineEdit" parent="settings/panel/vbox/aiendpoint"]
 layout_mode = 2
-text = "Отменить"
+size_flags_horizontal = 3
+
+[node name="language" type="HBoxContainer" parent="settings/panel/vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="settings/panel/vbox/language"]
+layout_mode = 2
+text = "LANGUAGE_LBL"
+
+[node name="option" type="OptionButton" parent="settings/panel/vbox/language"]
+layout_mode = 2
+
+[node name="theme" type="HBoxContainer" parent="settings/panel/vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="settings/panel/vbox/theme"]
+layout_mode = 2
+text = "THEME_LBL"
+
+[node name="option" type="OptionButton" parent="settings/panel/vbox/theme"]
+layout_mode = 2
+
+[node name="actions" type="HBoxContainer" parent="settings/panel/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="save" type="Button" parent="settings/panel/vbox/actions"]
+layout_mode = 2
+text = "SAVE_BTN"
+
+[node name="cancel" type="Button" parent="settings/panel/vbox/actions"]
+layout_mode = 2
+text = "CANCEL_BTN"
 
 [node name="load" type="HBoxContainer" parent="."]
 visible = false
@@ -117,35 +166,41 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="vbox" type="VBoxContainer" parent="load"]
+[node name="margin" type="MarginContainer" parent="load"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="vbox" type="VBoxContainer" parent="load/margin"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="scroll" type="ScrollContainer" parent="load/vbox"]
+[node name="scroll" type="ScrollContainer" parent="load/margin/vbox"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="load/vbox/scroll"]
+[node name="vbox" type="VBoxContainer" parent="load/margin/vbox/scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="save_1" parent="load/vbox/scroll/vbox" instance=ExtResource("2_mk3yl")]
+[node name="save_1" parent="load/margin/vbox/scroll/vbox" instance=ExtResource("2_mk3yl")]
 layout_mode = 2
 
-[node name="actions" type="HBoxContainer" parent="load/vbox"]
+[node name="actions" type="HBoxContainer" parent="load/margin/vbox"]
 layout_mode = 2
 alignment = 1
 
-[node name="cancel" type="Button" parent="load/vbox/actions"]
+[node name="cancel" type="Button" parent="load/margin/vbox/actions"]
 layout_mode = 2
-text = "Отмена"
+text = "CANCEL_BTN"
 
 [connection signal="pressed" from="main_view/vbox/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="main_view/vbox/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="main_view/vbox/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="main_view/vbox/exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="settings/vbox/actions/save" to="." method="_on_save_settings_pressed"]
-[connection signal="pressed" from="settings/vbox/actions/cancel" to="." method="_on_cancel_settings_pressed"]
-[connection signal="pressed" from="load/vbox/actions/cancel" to="." method="_on_cancel_load_pressed"]
+[connection signal="pressed" from="settings/panel/vbox/actions/save" to="." method="_on_save_settings_pressed"]
+[connection signal="pressed" from="settings/panel/vbox/actions/cancel" to="." method="_on_cancel_settings_pressed"]
+[connection signal="pressed" from="load/margin/vbox/actions/cancel" to="." method="_on_cancel_load_pressed"]

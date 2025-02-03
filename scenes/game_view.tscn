@@ -12,14 +12,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_posgu")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.319825, 0.341422, 0.416439, 1)
 
 [node name="vbox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -76,6 +75,7 @@ mode = 1
 title = "Info"
 initial_position = 1
 size = Vector2i(775, 500)
+visible = true
 wrap_controls = false
 borderless = false
 always_on_top = true
@@ -111,6 +111,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
+
+[node name="snlabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "Название истории:"
+
+[node name="story_name" type="Label" parent="info_panel/scroll/margin/vbox/main"]
+layout_mode = 2
+text = "-"
 
 [node name="hnlabel" type="Label" parent="info_panel/scroll/margin/vbox/main"]
 layout_mode = 2

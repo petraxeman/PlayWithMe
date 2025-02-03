@@ -1,0 +1,30 @@
+keys,ru,en
+SETTINGS_LBL,Настройки,Settings
+AIMODEL_LBL,ИИ модель,AI model
+AITOKEN_LBL,ИИ токен,AI token
+AIENDPOINT_LBL,Конечная точка,API endpoint
+THEME_LBL,Тема,Theme
+LANGUAGE_LBL,Языка,Language
+
+NEW_ADVENTURE_BTN,Новое преключение,New adventure
+LOAD_SAVE_BTN,Загрузить,Load
+SETTINGS_BTN,Настройки,Settings
+EXIT_BTN,Выход,Exit
+
+START_BTN,Начать,Start
+SELECT_BTN,Выбрать,Select
+DELETE_BTN,Удалить,Delete
+SAVE_BTN,Сохранить,Save
+CANCEL_BTN,Отменить,Cancel
+
+
+
+HERO_NAME_LBL,*Имя героя,*Hero name
+HERO_DESC_LBL,Описание героя,Hero description
+SETTING_LBL,*Сеттинг,*Setting
+ADDITIONAL_LBL,Дополнительно,Additional
+
+HERO_NAME_TEXT,Герой Гимель,Hero Himel
+HERO_DESC_TEXT,Сильный и умный,Strong and smart
+SETTING_TEXT,Средневековье,Medieval
+ADDITIONAL_TEXT,По аниме Провожающая в последний путь Фрирен,Based on the anime Friren Seeing Off Her Last Journey

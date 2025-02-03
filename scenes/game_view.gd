@@ -21,6 +21,7 @@ func start():
 	Globals.current_game.memory.append(resp["remember"])
 	Globals.current_game.chat.append({"role": "assistant", "text": resp["text"]})
 	Globals.current_game.active_choices = resp["choices"]
+	Globals.current_game.story_name = resp["story_name"]
 	
 	var message = message_pack.instantiate()
 	message.set_text(resp["text"])
@@ -101,6 +102,7 @@ func _on_info_open_pressed():
 	$info_panel/scroll/margin/vbox/main/hero_desc.text = cg.hero_desc if cg.hero_desc else "-"
 	$info_panel/scroll/margin/vbox/main/settings.text = cg.setting if cg.setting else "-"
 	$info_panel/scroll/margin/vbox/main/additional.text = cg.additional if cg.additional else "-"
+	$info_panel/scroll/margin/vbox/main/story_name.text = cg.story_name if cg.story_name else "-"
 	
 	render_memory()
 	
