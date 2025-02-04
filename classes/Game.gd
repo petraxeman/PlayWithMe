@@ -45,7 +45,7 @@ func load_game(filename: String):
 	var data = JSON.parse_string(save_file.get_as_text())
 	uuid = data["uuid"]
 	memory = data["memory"]
-	story_name = data["story_name"]
+	story_name = data.get("story_name", "This story without name")
 	setting = data["setting"]
 	additional = data["additional"]
 	hero_name = data["hero_name"]

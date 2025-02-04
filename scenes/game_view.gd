@@ -43,6 +43,7 @@ func continue_game():
 
 
 func choice(text: String, dificult: String):
+	$vbox/custom_input/edit.text = ""
 	var threshold: int = 0
 	match dificult:
 		"easy":

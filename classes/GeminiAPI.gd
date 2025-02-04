@@ -5,7 +5,7 @@ class_name GeminiAPI
 
 func ask(query: String):
 	var resp = await _request_text(query)
-	if resp["status"]:
+	if resp.get("status"):
 		return resp
 	return ""
 

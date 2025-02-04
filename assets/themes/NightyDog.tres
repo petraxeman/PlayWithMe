@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c034omjm8xim"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://c034omjm8xim"]
 
 [ext_resource type="FontFile" uid="uid://bamyoh46owved" path="res://assets/fonts/Pangolin-Regular.ttf" id="1_sys1x"]
 
@@ -68,6 +68,17 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lye2c"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.631527, 0.621698, 0.636312, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaq8g"]
 content_margin_left = 10.0
 content_margin_top = 5.0
@@ -97,6 +108,7 @@ LineEdit/styles/normal = SubResource("StyleBoxFlat_t5eme")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_1i13j")
 Panel/styles/panel = SubResource("StyleBoxFlat_cuvvp")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_smbyh")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_lye2c")
 TextEdit/font_sizes/font_size = 22
 TextEdit/fonts/font = ExtResource("1_sys1x")
 TextEdit/styles/normal = SubResource("StyleBoxFlat_jaq8g")
