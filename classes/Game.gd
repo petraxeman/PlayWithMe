@@ -14,6 +14,8 @@ var hero_desc: String = ""
 var scenes: Array = []
 var chat: Array = []
 
+var characters: Dictionary = {}
+var inventory: Dictionary = {}
 var active_choices = []
 
 
@@ -33,6 +35,8 @@ func save_game():
 		"hero_desc": hero_desc,
 		"scenes": scenes,
 		"chat": chat,
+		"characters": characters,
+		"inventory": inventory,
 		"active_choices": active_choices
 	}
 	var datas = JSON.stringify(data)
@@ -54,4 +58,6 @@ func load_game(filename: String):
 	scenes = data["scenes"]
 	chat = data["chat"]
 	
+	characters = data.get("characters", {})
+	inventory = data.get("inventory", {})
 	active_choices = data["active_choices"]

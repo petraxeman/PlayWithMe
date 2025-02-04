@@ -101,7 +101,7 @@ func _on_info_open_pressed():
 	$info_panel.reset_size()
 	
 	var sz = DisplayServer.screen_get_size()
-	var mult = 2.5
+	var mult = 2
 	sz = Vector2i(int(sz.x / mult), int(sz.y / mult))
 	
 	var cg = Globals.current_game
@@ -167,3 +167,25 @@ func _on_exit_pressed():
 func _on_enter_custom_choice_pressed():
 	
 	choice($vbox/custom_input/edit.text, "undefined")
+
+
+func _on_inventary_open_pressed() -> void:
+	for child in $inv_panel/scroll/margin/vbox/items.get_children():
+		child.queue_free()
+	
+	for item in Globals.current_game.inventory:
+		var row = HBoxContainer.new()
+		var item_name_label = Label.new()
+		var item_desc_label = Label.new()
+		item_name_label.text = item + " - "
+		item_desc_label.text = Globals.current_game.inventory[item]
+		row.add_child(item_name_label)
+		row.add_child(item_desc_label)
+		$inv_panel/scroll/margin/vbox/items.add_child(row)
+	
+	if Globals.current_game.inventory.is_empty():
+		var label = Label.new()
+		label.text = "Увы, но у вас нет предметов"
+		$inv_panel/scroll/margin/vbox/items.add_child(label)
+	
+	$inv_panel.show()
