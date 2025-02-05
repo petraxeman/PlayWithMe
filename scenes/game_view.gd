@@ -18,6 +18,7 @@ func start():
 	var cg = Globals.current_game
 	var resp = await Aiapi.gen_start_game(cg.hero_name, cg.hero_desc, cg.setting, cg.additional)
 	
+	parse_and_apply_events(resp["events"])
 	Globals.current_game.memory.append(resp["remember"])
 	Globals.current_game.chat.append({"role": "assistant", "text": resp["text"]})
 	Globals.current_game.active_choices = resp["choices"]
@@ -76,6 +77,7 @@ func choice(text: String, dificult: String):
 	var cg = Globals.current_game
 	var resp = await Aiapi.gen_cont_game(text, check_result)
 	
+	parse_and_apply_events(resp["events"])
 	Globals.current_game.memory.append(resp["remember"])
 	Globals.current_game.chat.append({"role": "assistant", "text": resp["text"]})
 	Globals.current_game.active_choices = resp["choices"]
@@ -89,6 +91,21 @@ func choice(text: String, dificult: String):
 	slide_down()
 	render_choices()
 	$vbox/custom_input/enter.disabled = false
+
+
+func parse_and_apply_events(events: Array):
+	for event in events:
+		if event is Dictionary:
+			continue
+		match event[0]:
+			"add_character_info":
+				var character_data = Globals.current_game.characters.get(event[1], [])
+				character_data.append(event[2])
+				Globals.current_game.characters[event[1]] = character_data
+			"add_item":
+				Globals.current_game.inventory[event[1]] = event[2]
+			"sub_item":
+				Globals.current_game.inventory.erase(event[1])
 
 
 func slide_down():
@@ -175,10 +192,16 @@ func _on_inventary_open_pressed() -> void:
 	
 	for item in Globals.current_game.inventory:
 		var row = HBoxContainer.new()
+		var item_delete_btn = Button.new()
 		var item_name_label = Label.new()
 		var item_desc_label = Label.new()
-		item_name_label.text = item + " - "
+		item_delete_btn.text = "Удалить"
+		item_delete_btn.pressed.connect(del_item.bind(item))
+		item_name_label.text = " | " + item + " | "
 		item_desc_label.text = Globals.current_game.inventory[item]
+		item_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		item_desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(item_delete_btn)
 		row.add_child(item_name_label)
 		row.add_child(item_desc_label)
 		$inv_panel/scroll/margin/vbox/items.add_child(row)
@@ -189,3 +212,37 @@ func _on_inventary_open_pressed() -> void:
 		$inv_panel/scroll/margin/vbox/items.add_child(label)
 	
 	$inv_panel.show()
+
+
+func del_item(item_name: String):
+	Globals.current_game.inventory.erase(item_name)
+	_on_inventary_open_pressed()
+
+
+func _on_chars_info_open_pressed() -> void:
+	for child in $char_panel/scroll/margin/vbox/items.get_children():
+		child.queue_free()
+	
+	for char in Globals.current_game.characters:
+		var row = HBoxContainer.new()
+		var title = Label.new()
+		var column = VBoxContainer.new()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		for info in Globals.current_game.characters[char]:
+			var info_row = Label.new()
+			info_row.text = info
+			info_row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			info_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			column.add_child(info_row)
+		title.text = char + " | "
+		row.add_child(title)
+		row.add_child(column)
+		$char_panel/scroll/margin/vbox/items.add_child(row)
+	
+	if Globals.current_game.characters.is_empty():
+		var label = Label.new()
+		label.text = "Увы, но у вас нет никакой информации"
+		$char_panel/scroll/margin/vbox/items.add_child(label)
+	
+	$char_panel.show()
+		

@@ -7,6 +7,7 @@ var save_slot_pack = preload("res://scenes/save_slot.tscn")
 
 
 func _ready():
+	print(OS.get_data_dir())
 	TranslationServer.set_locale(Globals.settings.language)
 	var theme_obj = load("res://assets/themes/" + Globals.settings.theme)
 	get_tree().root.theme = theme_obj

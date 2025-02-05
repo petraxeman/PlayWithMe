@@ -23,7 +23,8 @@ var start_game_query = """
 	"choices": [{"text": "Выбор 1", "dificult": "elementary"}, {"text": "Выбор 1", "dificult": "medium"}]
 	"events": [
 		["add_character_info", "Имя персонажа", "Какая то информация о нем."],
-		["add_item", "Название предмета", "Описание предмета"]
+		["add_item", "Название предмета", "Описание предмета"],
+		["sub_item", "Название предмета"]
 	]
 }
 
@@ -34,7 +35,11 @@ var start_game_query = """
 "hard" - Высокий шанс провала
 
 Если ты хочешь добавить информацию о персонаже, или предмет в инвентарь игроку, просто впиши соответсвующий event в поле events.
+Элементы поля events это списки.
 Поле events может быть пустым если ты ничего не хочешь добавлять. Не злоупотребляй этим полем.
+add_item - добавить в инвентарь главного героя предмет
+sub_item - убрать из инвентаря главного героя предмет
+add_character_info - добавить информацию о каком то персонаже в справочник и запомнить ее
 """
 
 var choice_game_query = """
@@ -49,6 +54,7 @@ var choice_game_query = """
 Игрок решил сделать: {choice}
 Получилось ли у него сделать это: {check_result}
 
+Тебе нужно сгенерировать то как игрок это сделал, и что произошло после этого
 Верни ответ в формате JSON.
 
 Пример:
@@ -59,7 +65,8 @@ var choice_game_query = """
 	"choices": [{"text": "Выбор 1", "dificult": "elementary"}, {"text": "Выбор 1", "dificult": "medium"}]
 	"events": [
 		["add_character_info", "Имя персонажа", "Какая то информация о нем."],
-		["add_item", "Название предмета", "Описание предмета"]
+		["add_item", "Название предмета", "Описание предмета"],
+		["sub_item", "Название предмета"]
 	]
 }
 У каждого выбора сложность может быть следующей:
@@ -69,7 +76,12 @@ var choice_game_query = """
 "hard" - Высокий шанс провала
 
 Если ты хочешь добавить информацию о персонаже, или предмет в инвентарь игроку, просто впиши соответсвующий event в поле events.
+Элементы поля events это списки.
 Поле events может быть пустым если ты ничего не хочешь добавлять. Не злоупотребляй этим полем.
+Объяснение методов:
+add_item - добавить в инвентарь главного героя предмет
+sub_item - убрать из инвентаря главного героя предмет
+add_character_info - добавить информацию о каком то персонаже в справочник и запомнить ее
 """
 
 
@@ -126,7 +138,7 @@ func gen_cont_game(choice: String, check_result: String):
 	
 	var query = choice_game_query.format(data)
 	
-	var characters_query = "Список персонажей учавствовавших в истории, и их черты:"
+	var characters_query = "Список персонажей учавствовавших в истории, и их черты:\n"
 	for character in Globals.current_game.characters:
 		characters_query += """
 		---
@@ -134,12 +146,12 @@ func gen_cont_game(choice: String, check_result: String):
 		Черты персонажа:
 		{character_desc}
 		""".format({"character_name": character, "character_desc": "\n".join(Globals.current_game.characters[character])})
+	characters_query += "---\n"
 	
-	var inventory_query = "Список всех предметов в инвентаре главного героя:"
+	var inventory_query = "Список всех предметов в инвентаре главного героя:\n"
 	for item in Globals.current_game.inventory:
-		inventory_query += """
-		{item_name} - {item_desc}
-		""".format({"item_name": item, "item_desc": Globals.current_game.inventory[item]})
+		inventory_query += "{item_name} - {item_desc}\n".format({"item_name": item, "item_desc": Globals.current_game.inventory[item]})
 	
+	print(characters_query + inventory_query + query)
 	var resp = await Globals.chatbot.ask(characters_query + inventory_query + query)
 	return resp

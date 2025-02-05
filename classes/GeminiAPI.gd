@@ -39,15 +39,10 @@ func _request_text(prompt):
 	var response = await Aiapi.http.request_completed
 	var resp = _parse_response(response[3])
 	
-	if not resp["status"]:
-		return ""
-	
 	if typeof(resp["result"]) == TYPE_DICTIONARY:
 		return resp["result"]
 	elif typeof(resp["result"]) == TYPE_STRING:
 		var resp_json = JSON.parse_string(resp["result"])
-		if not resp_json or not typeof(resp_json) == TYPE_DICTIONARY:
-			resp_json = await _request_text(prompt)
 		resp_json["status"] = true
 		return resp_json
 

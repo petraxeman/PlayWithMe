@@ -180,7 +180,6 @@ mode = 1
 title = "Inventory"
 initial_position = 1
 size = Vector2i(775, 500)
-visible = true
 wrap_controls = false
 borderless = false
 always_on_top = true
@@ -191,8 +190,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 770.0
-offset_bottom = 495.0
+offset_right = -5.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -214,12 +213,58 @@ theme_override_constants/separation = 20
 [node name="label" type="Label" parent="inv_panel/scroll/margin/vbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Inventory;"
+text = "Inventory:"
 
 [node name="items" type="VBoxContainer" parent="inv_panel/scroll/margin/vbox"]
 layout_mode = 2
 
+[node name="char_panel" type="PopupPanel" parent="."]
+auto_translate_mode = 1
+mode = 1
+title = "Inventory"
+initial_position = 1
+size = Vector2i(775, 500)
+visible = true
+wrap_controls = false
+borderless = false
+always_on_top = true
+
+[node name="scroll" type="ScrollContainer" parent="char_panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="margin" type="MarginContainer" parent="char_panel/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="vbox" type="VBoxContainer" parent="char_panel/scroll/margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="label" type="Label" parent="char_panel/scroll/margin/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Characters:"
+
+[node name="items" type="VBoxContainer" parent="char_panel/scroll/margin/vbox"]
+layout_mode = 2
+
 [connection signal="pressed" from="vbox/toolbar/info" to="." method="_on_info_open_pressed"]
 [connection signal="pressed" from="vbox/toolbar/inv" to="." method="_on_inventary_open_pressed"]
+[connection signal="pressed" from="vbox/toolbar/chars" to="." method="_on_chars_info_open_pressed"]
 [connection signal="pressed" from="vbox/toolbar/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="vbox/custom_input/enter" to="." method="_on_enter_custom_choice_pressed"]
